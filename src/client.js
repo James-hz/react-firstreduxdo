@@ -17,6 +17,7 @@ ReactDOM.render(
 );
 
 if (module.hot) {
+  console.log("client.js doing....")
   module.hot.accept('./containers/App', () => {
     const NextApp = require('./containers/App').default; // eslint-disable-line global-require
 

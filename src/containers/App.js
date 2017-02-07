@@ -7,32 +7,83 @@
 import React, {Component,PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {} from '../actions/';
+import * as  ActionTest from "../actions/testAction.js"
 import Main from '../components/App';
+import { push,replace,goBack } from 'redux-router';
 /* Populated by react-webpack-redux:reducer */
+
 class App extends Component {
-  render() {
-    const { actions } = this.props;
-    return <Main actions={actions} />;
+
+
+
+
+  componentWillMount(){
+    console.log("进入====")
+     this.props.actions.babyList("od-5Ut9ZZK9x_p__DXIm_v2Hen-8",(error,res)=>{
+           console.log(res)
+     });
   }
+
+  render(){
+
+    console.log("测试返回=======",this.props.datashow)
+    return(
+      <div>11122333</div>
+    )
+  }
+
+  //render() {
+  //  const {actions, testReducer} = this.props;
+  //  return <Main actions={actions} testReducer={testReducer}/>;
+  //}
 }
 /* Populated by react-webpack-redux:reducer
  *
  * HINT: if you adjust the initial type of your reducer, you will also have to
  *       adjust it here.
  */
-App.propTypes = {
-  actions: PropTypes.shape({})
-};
-function mapStateToProps(state) { // eslint-disable-line no-unused-vars
+//App.propTypes = {
+//  actions: PropTypes.shape({
+//    testAction: PropTypes.func.isRequired,
+//  }),
+//  testReducer: PropTypes.shape({})
+//};
+
+function mapStateToProps(state) {
+  // eslint-disable-line no-unused-vars
   /* Populated by react-webpack-redux:reducer */
-  const props = {};
-  return props;
+  const props = { testReducer: state.testReducer };
+
+  let datashow = 0;
+
+  if(state.testReducer.datashow){
+    datashow = state.testReducer.datashow
+
+  }
+
+  console.log("111122223333")
+
+  return {datashow:datashow};
+
 }
+
+//function mapDispatchToProps(dispatch) {
+//  /* Populated by react-webpack-redux:action */
+//  const actions = {
+//    testAction,
+//  };
+//  const actionMap = { actions: bindActionCreators(actions, dispatch) };
+//  return actionMap;
+//}
+
+
 function mapDispatchToProps(dispatch) {
-  /* Populated by react-webpack-redux:action */
-  const actions = {};
-  const actionMap = { actions: bindActionCreators(actions, dispatch) };
-  return actionMap;
+  return {
+    dispath:dispatch,
+    pushState: bindActionCreators(push, dispatch),
+    goBack:bindActionCreators(goBack, dispatch),
+    actions:bindActionCreators(ActionTest,dispatch)
+  }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

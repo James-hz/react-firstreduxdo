@@ -85,7 +85,7 @@ class WebpackBaseConfig {
         historyApiFallback: true,
         hot: true,
         inline: true,
-        port: 8000
+        port: 8000   //端口号与dev对应的端口号必须一致
       },
       entry: './index.js',
       module: {
@@ -194,8 +194,8 @@ class WebpackBaseConfig {
           }
         ]
       },
-      output: {
-        path: path.resolve('./dist/assets'),
+      output: {  //webpack 打包输出的位置
+        path: path.resolve('./dist/assets'), //用来存放打包后文件的输出目录
         filename: 'app.js',
         publicPath: './assets/'
       },
